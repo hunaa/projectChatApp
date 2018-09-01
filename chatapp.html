@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    <style>
+    div{
+        border: 5px solid black;
+        height: 100px;
+        margin: 10px;
+    }
+    </style>
+  </head>
+  <body>
+    <!--Creating a popUp -->
+    <script>
+    // var popUp = prompt("Enter your nickname: ");
+    // document.write("<h2>Welcome To The ChatRoom "+popUp+" </h2>");
+
+    var popUp = [];
+    popUp[0] = prompt("NickName?");
+    document.write("<h2>Welcome To The ChatRoom "+popUp+" </h2>");
+    localStorage.setItem("names", JSON.stringify(popUp));
+    </script>
+
+    
+    <input type="text" id="chatText" placeholder="Type Something...">
+    <input type="button" value="Send" id="button" onclick="myFunction">
+
+    <script>
+function myFunction(){
+    var getMsg = document.getElementById(chatText).value;
+    var chat = {
+        username: popUp,
+        message: getMsg
+    };
+        console.log(JSON.stringify(chat));
+
+        var chatToStore = [];
+        chatToStore.push(chat);
+
+        localStorage.setItem("list_data_key", JSON.stringify(chatToStore));
+}
+    function timer(getData){
+    var timer = setInterval(getData, 1000);
+    }
+    
+    function getData(){
+        var storedData = localStorage.getItem(chatToStore);
+        if(storedData){
+            chatToStore = JSON.parse(storedData);
+        }
+    }
+    </script>
+
+<div>
+        <script> document.write("hi"); </script>
+    </div>
+
+</body>
+</html>
