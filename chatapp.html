@@ -8,57 +8,77 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
     <style>
-    div{
-        border: 5px solid black;
-        height: 100px;
-        margin: 10px;
-    }
+        div {
+            border: 5px solid black;
+            height: 100px;
+            margin: 10px;
+        }
+        ul{
+            display: inline-block;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <!--Creating a popUp -->
     <script>
     // var popUp = prompt("Enter your nickname: ");
     // document.write("<h2>Welcome To The ChatRoom "+popUp+" </h2>");
-
     var popUp = [];
     popUp[0] = prompt("NickName?");
     document.write("<h2>Welcome To The ChatRoom "+popUp+" </h2>");
     localStorage.setItem("names", JSON.stringify(popUp));
     </script>
 
-    
+
     <input type="text" id="chatText" placeholder="Type Something...">
-    <input type="button" value="Send" id="button" onclick="myFunction">
+    <input type="button" value="Send" id="button" onclick="myFunction()">
 
     <script>
 function myFunction(){
-    var getMsg = document.getElementById(chatText).value;
+    var getMsg = document.getElementById("chatText").value;
+    //console.log(getMsg);
     var chat = {
         username: popUp,
         message: getMsg
     };
-        console.log(JSON.stringify(chat));
+        //console.log(JSON.stringify(chat));
+    var chatToStore = [];
+    for (var i = 0; i < chatToStore.length; i++) {
 
-        var chatToStore = [];
         chatToStore.push(chat);
-
         localStorage.setItem("list_data_key", JSON.stringify(chatToStore));
+
+        for (var i = 0; i < chatToStore.length; i++) {
+            var storedData = localStorage.getItem(chatToStore);
+            if (storedData) {
+                document.getElementById("name").innerHTML = chatToStore.username[i] = JSON.parse(storedData);
+                document.getElementById("msg").innerHTML = chatToStore.message[i] = JSON.parse(storedData);
+
+            }
+        }
+
 }
     function timer(getData){
     var timer = setInterval(getData, 1000);
     }
-    
+
     function getData(){
         var storedData = localStorage.getItem(chatToStore);
         if(storedData){
-            chatToStore = JSON.parse(storedData);
+            document.getElementById("div").innerHTML = chatToStore = JSON.parse(storedData);
+
         }
     }
     </script>
 
-<div>
-        <script> document.write("hi"); </script>
+    <div >      
+        <script>
+        </script>
+        <ul>
+            <li id="name">Name</li>
+            <li id="msg">Message</li>
+        </ul>
+
     </div>
 
 </body>
